@@ -61,6 +61,7 @@ var prefeedbacktext
 var line
 var myfeedbacktext
 var myfeedbackdone
+var startscreen = true
 
 let socket = new WebSocket("wss://syrj2md5wc.execute-api.us-west-2.amazonaws.com/production");
 
@@ -144,7 +145,9 @@ function ticker(){
 
 function preload ()
 {
+
     this.load.image('back', 'back.png');
+    this.load.image("start", "start.png")
 
     //strawberry
     this.load.image('1t1', '/strawberry/thinking1.png');
@@ -213,13 +216,33 @@ function endFeedback () {
 
 }
 
+function loadFont(name, url) {
+    var newFont = new FontFace(name, `url(${url})`);
+    newFont.load().then(function (loaded) {
+        document.fonts.add(loaded);
+    }).catch(function (error) {
+        return error;
+    });
+}
+
 function create ()
 {
 
+    loadFont("dreamwood", "Dreamwood.ttf")
+
+    var startscreen = this.add.sprite(600,450, "start")
+    startscreen.setDepth(10);
+
     this.add.sprite(600, 450, 'back');
 
-    element = this.add.dom(600, 685, '#battle');
-    element.node.focus();
+    this.input.on(Phaser.Input.Events.POINTER_DOWN, function (pointer) {
+        startscreen.setDepth(-1);
+        element.x = 650;
+        element.y = 700;
+    }, this);
+
+    element = this.add.dom(9000, 9000, '#battle');
+    element.node.focus()
     element.node.addEventListener("input", onMainInput);
 
     feedbacktext = this.add.dom(380, 685, '#feedbacktext')
@@ -239,10 +262,8 @@ function create ()
     }
     timertext = this.add.text(870,410, "Time left: " + secondsToText(timeleft), {fontFamily: 'Garamond', 'fontSize': 18, 'color': '#000000'});
     wordtext = this.add.text(870, 440, "Word count: " + currentWordCount, {fontFamily: 'Garamond', 'fontSize': 18, 'color': '#000000'})
-    prompttext = this.add.text(120, 390, "Prompt: Lorem ipsum dolor sit amet, consectetur adipiscing",
-        {fontFamily: 'Garamond', 'fontSize': 20, 'color': '#000000'});
-    prompttext2 = this.add.text(120, 420, "sed do eiusmod tempor incididunt ut labore et. (100 words)",
-        {fontFamily: 'Garamond', 'fontSize': 20, 'color': '#000000'});  
+    prompttext = this.add.text(120, 410, "Prompt: What superpower would you like to have and why?",
+        {fontFamily: 'Garamond', 'fontSize': 20, 'color': '#000000'}); 
 
     statetext = this.add.text(870, 380, "Waiting for others", {fontSize: 18, color: '#000000', fontFamily: 'Garamond'})
 
