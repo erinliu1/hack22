@@ -79,7 +79,7 @@ socket.onmessage = function(event){
         currentlyTyping[jsevent.id] = false;
     } else if (jsevent.message === "game start" && state == 0){
         state = 1;
-        timeleft = 5;
+        timeleft = 45;
         statetext.text = "Writing stage!"
         element.node.readOnly = false;
         window.setTimeout(ticker, 1000);
@@ -104,7 +104,7 @@ socket.onmessage = function(event){
         me = jsevent.id;
         if (me == 3) {
             state = 1;
-            timeleft = 5;
+            timeleft = 45;
             statetext.text = "Writing stage!"
             element.node.readOnly = false;
             window.setTimeout(ticker, 1000);
@@ -192,7 +192,7 @@ function startFeedback () {
     statetext.text = "Feedback stage!"
     wordtext.text = "Player " + (me != 0 ? me : 4) + "'s text"
     wordtext.visible = true;
-    timeleft = 10;
+    timeleft = 90;
     feedbacktext.node.visibility = "visible";
     feedbacktext.node.value = prefeedbacktext;
     //alert(prefeedbacktext)
@@ -206,7 +206,7 @@ function endFeedback () {
     state = 5;
     statetext.text = "2nd writing stage!";
     wordtext.text = "Word count: " + currentWordCount;
-    timeleft = 10;
+    timeleft = 90;
     element.node.visibility = "visible";
     element.node.value = myfeedbacktext;
     feedbacktext.node.visibility = "hidden";
@@ -237,8 +237,8 @@ function create ()
 
     this.input.on(Phaser.Input.Events.POINTER_DOWN, function (pointer) {
         startscreen.setDepth(-1);
-        element.x = 650;
-        element.y = 700;
+        element.x = 610;
+        element.y = 690;
     }, this);
 
     element = this.add.dom(9000, 9000, '#battle');
