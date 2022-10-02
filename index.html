@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    
+    
+    <style>
+        #game {
+            margin: auto;
+            display: block;
+            justify-content: center;
+
+            width: 1200px;
+            height: 900px
+        }
+
+        textarea {
+            font-size: 25px;
+            background: transparent;
+            resize: none;
+            border: none;
+        }
+
+        body {
+            background-color: lightgreen;
+        }
+
+        #feedbackinput, #feedbacktext {
+            border: 1px
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="game"></div>
+
+    <textarea id="battle" cols="60" rows="12" autofocus readonly hidden></textarea>
+    <textarea id="feedbacktext" cols="25" rows="12" readonly hidden></textarea>
+    <textarea id="feedbackinput" cols="25" rows="12"  hidden></textarea>
+
+    <script src="game.js"></script>
+
+</body>
+</html>
